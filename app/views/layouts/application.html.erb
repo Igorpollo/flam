@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html id="ng-app" ng-app="app">
+<head>
+  <title>Treebook</title>
+  <%= stylesheet_link_tag "bootstrap" %>
+  <% if content_for? :for_head %>
+    <%= yield :for_head %>
+  <% end %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "jquery-1.11.1.min" %>
+  <%= javascript_include_tag "angular.min" %>
+  <%= javascript_include_tag "angular-file-upload" %>
+  <%= javascript_include_tag "controllers" %>
+  <%= javascript_include_tag "bootstrap.min" %>
+  <%= javascript_include_tag "directives" %>
+  <%= javascript_include_tag "jquery.collagePlus.min" %>
+  <%= javascript_include_tag "jquery.backstretch.min" %>
+  <%= javascript_include_tag "flampic" %>
+  
+  <%= csrf_meta_tags %>
+</head>
+<body>
+<nav class="navbar navbar-default navbar-static-top" role="navigation">
+    <div class="container2">
+        <a class="navbar-brand" href="#"><%= image_tag "logo.jpg" %></a>
+        <ul class="nav navbar-nav menutop">
+            <li>
+                <a href="#">PHOTOS</a>
+            </li>
+            <li>
+                <a href="#">CATEGORIES</a>
+            </li>
+            <li>
+                <a href="3#">CONTESTS</a>
+            </li>
+            <li>
+                <a href="#2">BLOG</a>
+            </li>
+        </ul>
+        <ul class="nav navbar-nav menutopRIGHT pull-right">
+            <li>
+                <%= image_tag "search.png" %>
+            </li>
+            <li>
+            	<%= button_to "upload", upload_photo_path, html_options = {'class' => 'btnUpload'} %> 
+            </li>
+            <% if user_signed_in? %>
+	            <li class="userbox dropdown" data-toggle="dropdown">
+	                <div class="userpicture pull-left">
+	                    <%= image_tag "http://graph.facebook.com/100001131304226/picture" %>
+	                </div>
+	                <div class="userName pull-left">
+	                    <strong><%= @user.full_name %></strong>
+	                        <p>85.133</p>
+	                </div>
+	                <div class="pull-left iconUserMenu">
+	                    <%= image_tag "icon-menu.jpg" %>
+	                </div>
+	                <ul class="dropdown-menu" role="menu">
+	                    <li>
+	                        <a href="#">teste</a>
+	                    </li>
+	                </ul>
+	            </li>
+            <% else %>
+	            <li class="reset">
+	                <a href="3#">Sign in</a>
+	            </li>
+	            <li class="reset">
+	                <a href="3#">Register</a>
+	            </li>
+			<% end %>
+        </ul>
+
+    </div>
+</nav>
+<div class="wrap">
+<%= yield %>
+</div>
+</body>
+</html>
+
+
+
+<% if flash[:notice] %>
+    <div class="alert alert-success"><%= flash[:notice] %></div>
+<% end %>

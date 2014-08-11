@@ -1,0 +1,9 @@
+<h1><%= @user.full_name %></h1>
+<%= link_to "Add friend", new_user_follower_path(follower_id: @user) %>
+<% if @clientes %>
+<div>
+	<% @clientes.each do |cliente| %>
+	<p><%= cliente.idade %></p>
+	<% end %>
+<div>
+<% end %>

@@ -1,0 +1,13 @@
+<h1><%= @friend.full_name%></h1>
+<p>Seguir <%= @friend.full_name %>? </p>
+
+<%= form_for @user_follower, method: :post do |form| %>
+<div class="form">
+	
+	<%= form.hidden_field :friend_id, value: @friend.id %>
+	<%= submit_tag "Yes", class: 'btn btn-primary' %>
+	<%= link_to "Add friend", new_user_follower_path(:query => @friend.id), remote: true, class: 'btn' %>
+	<%= link_to "Remove friend", new_user_follower_path(:query => @friend.id), method: :delete, remote: true, class: 'btn' %>
+<% end %>
+</div>
+	

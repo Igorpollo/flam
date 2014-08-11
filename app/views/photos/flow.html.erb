@@ -1,0 +1,28 @@
+
+<div class="capa">
+
+</div>
+<div class="navcontainer">
+    <ul>
+        <li>
+            <a href="#">Recent</a>
+        </li>
+        <li>
+            <a href="#">Popular</a>
+        </li>
+        <li>
+            <a href="#">Following</a>
+        </li>
+    </ul>
+</div>
+<div class="flow">
+    <% @photos.each do |photo| %><div class="thumb"><a href="#"><%= image_tag photo.path.url, :alt => photo.title %></a><div class="captionThumbSocial"><div class="pull-left titleBox"><p class="title"><%= photo.title %></p><span class="author">by <%= photo.user.full_name %></span></div><div class="pull-right socialBox"><p class="title">Curtir</p></div></div></div><% end %>
+
+
+
+
+
+<script>
+    $(".capa").backstretch("http://31.media.tumblr.com/f0cb0d2bc887555434fa3afe0530e1cf/tumblr_n1ipr3bTo11st5lhmo1_1280.jpg");
+</script>
+

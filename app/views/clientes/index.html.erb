@@ -1,0 +1,38 @@
+<h1>Listing clientes</h1>
+<ul class="nav">
+  <% if user_signed_in? %>
+  <li><img src="<%= current_user.image %>"><%= link_to current_user.full_name, edit_user_registration_path %></li>
+  <li><%= link_to 'Logout', destroy_user_session_path, method: :delete %></li>
+  <% else %>
+  <li><%= link_to 'Sign up', register_path %></li>
+  <li><%= link_to 'Sign in', user_session_path %></li>
+  <%= link_to "Sign in with Facebook", user_omniauth_authorize_path(:facebook) %>
+  <% end %>
+</ul>
+<table>
+  <thead>
+    <tr>
+      <th>Nome</th>
+      <th>Idade</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @clientes.each do |cliente| %>
+      <tr>
+        <td><%= link_to cliente.user.full_name, profile_path(cliente.user) %></td>
+        <td><%= cliente.idade %></td>
+        <td><%= link_to 'Show', cliente %></td>
+        <td><%= link_to 'Edit', edit_cliente_path(cliente) %></td>
+        <td><%= link_to 'Destroy', cliente, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Cliente', new_cliente_path %>

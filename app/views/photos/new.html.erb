@@ -1,0 +1,148 @@
+<% content_for :for_head do %>
+  <%= stylesheet_link_tag "style-clean" %>
+<% end %>
+<body ng-controller="AppController" nv-file-drop="" uploader="uploader">
+    <div class="wrapUploader">
+        <div class="containerUpload">
+
+
+               
+
+                    <div class="upload_box">
+                        <div class="upload_boxBtn">
+                            <div class="progress progressAll">
+                                <div class="progress-bar" role="progressbar" ng-style="{ 'width': uploader.progress + '%' }"></div>
+                            </div>
+                            <input type="file" nv-file-select="" name="photo[path]" id="photo_path" uploader="uploader" multiple  /><br/>
+                            <btn class="btn upload_Btn"><img src="/assets/upload2ok.png" alt="upload">Upload</btn>
+                        </div>
+                    </div>
+                    <div class="previews col-md-12">
+                        <h3> Photos: </h3>
+                        <div class="previewBox pull-left" ng-repeat="item in uploader.queue">
+                            <div class="preview" ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }" data-form="{{ item.file.dataForm }}"></div>
+                        </div>
+                    </div>
+                    
+                 <%= simple_form_for @photo do |f| %>
+                <div id="myForms">
+                    
+                    <div class="formPhoto adicional">
+                        <div class="col-md-8 formUpload">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" class="form-control" name="photo[title]" id="title" placeholder="Title">
+                            </div>
+                            <div class="form-group">
+                                <label for="title">Description</label>
+                                <textarea cols="40" class="form-control" name="photo[description]"  placeholder="Enter description"></textarea>
+                            </div>
+                            
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="title">Tags</label>
+                                        <input type="text" class="form-control" id="title" placeholder="Tag">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="categoria">Album</label>
+                                        <%= f.association :album, label: false, input_html: {class: 'form-control'} %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <% end %>
+                 <div class="col-md-9" style="margin-bottom: 40px">
+
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th width="50%">Name</th>
+                                <th ng-show="uploader.isHTML5">Title</th>
+                                <th ng-show="uploader.isHTML5">Size</th>
+                                <th ng-show="uploader.isHTML5">Progress</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in uploader.queue">
+                                <td>
+                                    <strong>{{ item.file.name }}</strong>
+                                    <!-- Image preview -->
+                                    <!--auto height-->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100 }"></div>-->
+                                    <!--auto width-->
+                                    <div ng-show="uploader.isHTML5" ng-thumb="{ file: item._file, height: 100 }"></div>
+                                    <!--fixed width and height -->
+                                    <!--<div ng-thumb="{ file: item.file, width: 100, height: 100 }"></div>-->
+                                
+                                </td>
+                                <td> {{ item.file.teste }}</td>
+                                <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                                <td ng-show="uploader.isHTML5">
+                                    <div class="progress" style="margin-bottom: 0;">
+                                        <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                                    </div>
+                                </td>
+                                <td class="text-center">
+                                    <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                                    <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                                    <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                                </td>
+                                <td nowrap>
+                                    <button type="button" class="btn btn-success btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                        <span class="glyphicon glyphicon-upload"></span> Upload
+                                    </button>
+                                    <button type="button" class="btn btn-warning btn-xs" ng-click="item.cancel()" ng-disabled="!item.isUploading">
+                                        <span class="glyphicon glyphicon-ban-circle"></span> Cancel
+                                    </button>
+                                    <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                        <span class="glyphicon glyphicon-trash"></span> Remove
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <div>
+                        <div>
+                        </div>
+                        <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                            <span class="glyphicon glyphicon-upload"></span> Upload all
+                        </button>
+                    </div>
+
+                </div>
+            
+        </div>         
+     </div>
+<script>
+     $('.formPhoto').find(':input').attr('disabled', true);
+</script>
+
+<script>
+    $('body').on('click', '.preview', function(){
+        $('.formPhoto').hide();
+        $('.adicional').hide();
+        $('.preview').removeClass('previewsClick');
+        $(this).addClass('previewsClick');
+        var data = $(this).attr('data-form');
+        myDiv = $('div[data-form="' + data + '"]');
+        myDiv.show();
+        myDiv.find(':input').attr('disabled', false);
+    });
+</script>
+
+<script>
+    $('.upload_Btn').bind("click" , function () {
+        $('#photo_path').click();
+    });
+</script>
+    </body>

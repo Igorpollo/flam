@@ -1,0 +1,49 @@
+        var f8 = document.createElement("div"); //input element, text
+                f8.setAttribute('class',"col-md-8");
+
+                 f.appendChild(f8);
+
+                    var f81 = document.createElement("div"); //input element, text
+                    f81.setAttribute('class',"form-group formUpload");
+
+                     f8.appendChild(f81);
+
+                        var f81_1 = document.createElement("label"); //input element, text
+                        f81_1.setAttribute('for',"title");
+                        f81_1.innerHTML = "Title";
+                       
+                         f81.appendChild(f81_1);
+
+                        var f81_2 = document.createElement("input"); //input element, text
+                        f81_2.setAttribute('type',"text");
+                        f81_2.setAttribute('class',"form-control");
+                        f81_2.setAttribute('placeholder',"Title");
+
+                         f81.appendChild(f81_2);
+
+                    var f82 = document.createElement("div"); //input element, text
+                    f82.setAttribute('class',"form-group formUpload");
+
+                     f8.appendChild(f82);
+
+                        var f82_1 = document.createElement("label"); //input element, text
+                        f82_1.setAttribute('for',"description");
+                        f82_1.innerHTML = "<%= simple_form_for @photo, :html => { :multipart => true } do |f| %>
+  <%= f.error_notification %>
+
+     <%= f.input :path, as: :file %>
+     <%= f.association :album %>
+    <%= f.input :title %>
+    <%= f.input :description %>
+
+    <%= f.button :submit %></div>
+<% end %>";
+
+                         f82.appendChild(f82_1);
+
+                        var f82_2 = document.createElement("textarea"); //input element, text
+                        f82_2.setAttribute('rows',"5");
+                        f82_2.setAttribute('class',"form-control");
+                        f82_2.setAttribute('placeholder',"Enter Description");
+
+                         f82.appendChild(f82_2);
