@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html id="ng-app" ng-app="app">
 <head>
-  <title>Treebook</title>
+
+  <% if yield(:title).blank? %>
+  <title> Flampic - Compartilhamento de fotos</title>
+  <% else %>
+  <title> <%= yield(:title) %> | Flampic</title>
+  <% end %>
   <%= stylesheet_link_tag "bootstrap" %>
+  <%= stylesheet_link_tag "magnific-popup" %>
+  
   <% if content_for? :for_head %>
     <%= yield :for_head %>
   <% end %>
@@ -15,11 +22,14 @@
   <%= javascript_include_tag "directives" %>
   <%= javascript_include_tag "jquery.collagePlus.min" %>
   <%= javascript_include_tag "jquery.backstretch.min" %>
+  <%= javascript_include_tag "jquery.magnific-popup.min" %>
   <%= javascript_include_tag "flampic" %>
   
   <%= csrf_meta_tags %>
+
 </head>
 <body>
+  
 <nav class="navbar navbar-default navbar-static-top" role="navigation">
     <div class="container2">
         <a class="navbar-brand" href="#"><%= image_tag "logo.jpg" %></a>
@@ -64,7 +74,7 @@
 	            </li>
             <% else %>
 	            <li class="reset">
-	                <a href="3#">Sign in</a>
+	                <a class="signIn" href="#login">Sign in</a>
 	            </li>
 	            <li class="reset">
 	                <a href="3#">Register</a>
@@ -74,9 +84,59 @@
 
     </div>
 </nav>
+
+<div id="login" class="zoom-anim-dialog mfp-hide">
+  <div class="loginPopup">
+    <h2>LOGIN TO YOUR ACCOUNT</h2>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="inputLogin"><%= f.label :email %><br />
+    <%= f.email_field :email, autofocus: true, placeholder: 'your@email.com' %></div>
+
+    <div><%= f.label :password %><br />
+      <%= f.password_field :password, autocomplete: "off", placeholder: 'Password' %></div>
+
+    <% if devise_mapping.rememberable? -%>
+      <div><%= f.check_box :remember_me %> <%= f.label :remember_me %></div>
+    <% end %>
+  </div>
+  <div class="loginBottom">
+      <%= f.submit "Sign in", class: 'btn buttonLoginPopup btn-block' %>
+      <a href="#"><p>Forgot password or can't login?</p></a>
+  </div>
+  <a href="/users/auth/facebook">
+    <div class="loginFacebook">
+    </div>
+  </a>
+    <% end %>
+</div>
+
 <div class="wrap">
 <%= yield %>
 </div>
+<script>
+$(document).ready(function() {
+  $('.signIn').magnificPopup({
+    type: 'inline',
+
+    fixedContentPos: false,
+    fixedBgPos: true,
+
+    overflowY: 'auto',
+
+    closeBtnInside: true,
+    preloader: true,
+    
+    midClick: true,
+    removalDelay: 300,
+    mainClass: 'mfp-with-zoom'
+  });
+});
+</script>
+<script>
+$('.loginBottom').click(function() {
+  $.magnificPopup.close();
+})
+</script>
 </body>
 </html>
 

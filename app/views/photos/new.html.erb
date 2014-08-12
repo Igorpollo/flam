@@ -1,6 +1,7 @@
 <% content_for :for_head do %>
   <%= stylesheet_link_tag "style-clean" %>
 <% end %>
+ <% content_for :title, "Upload" %>
 <body ng-controller="AppController" nv-file-drop="" uploader="uploader">
     <div class="wrapUploader">
         <div class="containerUpload">

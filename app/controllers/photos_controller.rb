@@ -9,7 +9,8 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
-    @photos = current_user.photos.all
+    @user = User.find_by_profile_name(params[:profile_name])
+    @photos = @user.photos.all
   end
 
   # GET /photos/1
@@ -23,6 +24,8 @@ class PhotosController < ApplicationController
     params[:profile_name] = current_user
     @photo = current_user.photos.new
   end
+
+  
 
   def flow
     @user = current_user
@@ -64,10 +67,14 @@ class PhotosController < ApplicationController
   # DELETE /photos/1
   # DELETE /photos/1.json
   def destroy
-    @photo.destroy
-    respond_to do |format|
-      format.html { redirect_to photos_url }
-      format.json { head :no_content }
+    if current_user.id == @photo.user.id
+      @photo.destroy
+      respond_to do |format|
+        format.html { redirect_to photos_url }
+        format.json { head :no_content }
+      end
+    else
+      redirect_to :back
     end
   end
   
@@ -79,7 +86,7 @@ class PhotosController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
-      @photo = current_user.photos.find(params[:id])
+      @photo = Photo.friendly.find(params[:id])
     end
     
     def find_user

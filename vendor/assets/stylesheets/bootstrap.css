@@ -7688,9 +7688,9 @@ background-color: #ccc;
   width: 100%;
   position: relative;
   opacity: 0;
-   transition: opacity .5s ease-in-out;
-   -moz-transition: opacity .5s ease-in-out;
-   -webkit-transition: opacity .5s ease-in-out;
+   transition: opacity .3s ease-in-out;
+   -moz-transition: opacity .3s ease-in-out;
+   -webkit-transition: opacity .3s ease-in-out;
 }
 
 .titleBox {
@@ -7699,6 +7699,103 @@ background-color: #ccc;
 
 .socialBox {
   min-width: 50%;
+}
+
+#login {
+  max-width: 310px;
+  background-color: #fff;
+  margin: 40px auto;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+.loginPopup {
+  padding: 20px 30px;
+}
+.loginPopup h2 {
+  text-align: center;
+  font-size: 15px;
+  font-weight: bold;
+  color: #71728e;
+}
+
+.loginPopup input[type="text"], .loginPopup input[type="password"],  .loginPopup input[type="email"] {
+  width: 250px;
+  height: 46px;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  background-color: #fff;
+  border: 1px solid #e5e5e5;
+  font-size: 14px;
+  padding-left: 10px;
+}
+
+.loginPopup input[type="text"]:focus, .loginPopup input[type="password"]:focus,  .loginPopup input[type="email"]:focus, .loginPopup input[type="email"]:active {
+  border-color: #949494 !important;
+  outline: 0;
+}
+
+.loginPopup label {
+  color: #71778e;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+.loginPopup .inputLogin {
+  margin-bottom: 25px;
+}
+
+.loginBottom {
+  background-color: #f0f3f8;
+  padding: 20px 30px;
+}
+
+.loginBottom a p {
+  color: #4E70A7;
+  font-size: 13px;
+  text-decoration: underline;
+  text-align: center;
+  margin: 20px 0px;
+}
+
+.loginFacebook {
+  height: 40px;
+  background-image: url(/assets/facebooklogin.jpg);
+  -webkit-border-bottom-right-radius: 4px;
+  -webkit-border-bottom-left-radius: 4px;
+  -moz-border-radius-bottomright: 4px;
+  -moz-border-radius-bottomleft: 4px;
+  border-bottom-right-radius: 4px;
+  border-bottom-left-radius: 4px;
+}
+
+.loginFacebook:hover {
+  -webkit-box-shadow: inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
+  -moz-box-shadow:    inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
+  box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
+}
+
+.buttonLoginPopup {
+  border: 1px solid #1C57E3;
+background: -moz-linear-gradient(top,  rgba(65,116,232,0.88) 0%, rgba(65,116,232,1) 100%);
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(65,116,232,0.88)), color-stop(100%,rgba(65,116,232,1)));
+background: -webkit-linear-gradient(top,  rgba(65,116,232,0.88) 0%,rgba(65,116,232,1) 100%);
+background: -o-linear-gradient(top,  rgba(65,116,232,0.88) 0%,rgba(65,116,232,1) 100%);
+background: -ms-linear-gradient(top,  rgba(65,116,232,0.88) 0%,rgba(65,116,232,1) 100%);
+background: linear-gradient(to bottom,  rgba(65,116,232,0.88) 0%,rgba(65,116,232,1) 100%);
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e04174e8', endColorstr='#4174e8',GradientType=0 );
+color: #fff;
+font-size: 16px;
+}
+
+.buttonLoginPopup:hover {
+  color: #fff;
+font-size: 16px;
+-webkit-box-shadow: inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
+-moz-box-shadow:    inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
+box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
 }
 
 
