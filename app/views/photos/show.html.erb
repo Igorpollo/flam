@@ -1,31 +1,70 @@
-<p id="notice"><%= notice %></p>
+<% content_for :for_head do %>
+  <%= stylesheet_link_tag "style-clean" %>
+<% end %>
+<div class="wrapImgShow">
+<div class="containerImg">
 
-<p>
-  <strong>Album:</strong>
-  <%= @photo.album %>
-  
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @photo.user %>
-</p>
-
-<p>
-  <strong>image:</strong>
   <%= image_tag @photo.path.url %>
-</p>
+  
+</div>
+<div class="wrapimgInfos">
+    <div class="containerImgInfos">
 
+      <div class="col-md-6">
+        
+        <div class="infoTitle">
 
-<p>
-  <strong>Title:</strong>
-  <%= @photo.title %>
-</p>
+          <div class="photoFollowBtn">
+            <img src="/assets/2.fw.png" class="iconAction">
+          </div>
+          <div class="userPhotoPicture">
+            <img src="/assets/profile.jpg">
+          </div>
+          <h2 class="photoUsername">Igor Martins</h2>
+          <h2>Pier de dia</h2>
+        </div>
+        <span class="photoDescription">
+          Ten years ago Puerto Escondido wasn't known for much more than a small fishing village on Mexico's Pacific Coast. Surfers have recently put this place on the map traveling to the port city for a chance to ride its famous break called the "Mexican Pipeline".
+        </span>
+        <div class="photoComments">
+          <h2>3 Comments</h2>
+          <ol>
+            <li class="comment">
+              <a href="#"><img src="/assets/profile.jpg">Igor Martins
+              </a>
+              <div class="comment-body">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu nisl neque. Aenean nec turpis sem. Aliquam molestie lorem nisi, ac lacinia dui viverra ac. Nulla eu consectetur ligula. Nulla cursus sagittis metus sit amet convallis. Ut feugiat arcu justo. Vestibulum euismod egestas nisl.</p>
+                <p class="comment-meta">
+                  <span> 6 hours ago </span>
+                </p>
+              </div>
+            </li>
+            <li class="comment">
+              <a href="#"><img src="/assets/profile.jpg">Igor Martins
+              </a>
+              <div class="comment-body">
+                <p>Lorem ipsum dolor!</p>
+                <p class="comment-meta">
+                  <span> 6 hours ago </span>
+                </p>
+              </div>
+            </li>
 
-<p>
-  <strong>Description:</strong>
-  <%= @photo.description %>
-</p>
+            <div class="comment-form pull-left">
+              <a href="#" class="pull-left"><img src="/assets/profile.jpg">
+              </a>
+               <textarea id="comment-new" rows="3" placeholder="Add a comment"></textarea>
+               <p class="pull-right"><button class="btn btn-primary">COMMENT</button> </p>
+            </div>
 
-<%= link_to 'Edit', edit_photo_path(@photo) %> |
-<%= link_to 'Back', photos_path %>
+          </ol>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <%= fa_icon "camera-retro" %>
+      </div>
+
+    </div>
+  </div>
+</div>

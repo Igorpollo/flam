@@ -2,6 +2,7 @@
 <div class="capa">
 
 </div>
+<% if user_signed_in? %>
 <div class="navcontainer">
     <ul>
         <li>
@@ -15,6 +16,7 @@
         </li>
     </ul>
 </div>
+<% end %>
 <div class="flow">
     <% @photos.each do |photo| %><div class="thumb"><a href="#"><%= image_tag photo.path.url, :alt => photo.title %></a><div class="captionThumbSocial"><div class="pull-left titleBox"><p class="title"><%= photo.title %></p><span class="author">by <%= photo.user.full_name %></span></div><div class="pull-right socialBox"><p class="title">Curtir</p></div></div></div><% end %>
 

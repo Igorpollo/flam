@@ -373,7 +373,7 @@ h6,
   font-family: inherit;
   font-weight: 500;
   line-height: 1.1;
-  color: #545454;
+  color: #5c5c5c;
 }
 h1 small,
 h2 small,
@@ -7750,6 +7750,7 @@ background-color: #ccc;
 .loginBottom {
   background-color: #f0f3f8;
   padding: 20px 30px;
+  padding-bottom: 10px;
 }
 
 .loginBottom a p {
@@ -7775,6 +7776,14 @@ background-color: #ccc;
   -webkit-box-shadow: inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
   -moz-box-shadow:    inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
   box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
+}
+
+.rememberMe {
+  margin-top: 10px;
+}
+
+.rememberMe label {
+  font-size: 13px;
 }
 
 .buttonLoginPopup {
@@ -7818,3 +7827,186 @@ box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
 
 }
 
+.wrapImgShow {
+    top: 70px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    position: absolute;
+    width: auto;
+    height: 80%;
+    background-image: url("/assets/noise.gif");
+}
+
+.containerImg {
+  margin-right: auto;
+  margin-left: auto;
+  height: 100%;
+  padding: 30px;
+}
+
+.containerImg img {
+  width: auto;
+  height: 100%;
+  display: block;
+  margin-right: auto;
+  margin-left: auto;
+}
+.wrapimgInfos {
+  width: 100%;
+  display: block;
+   
+   height: 20%;
+}
+.containerImgInfos {
+  margin-right: auto;
+  margin-left: auto;
+  height: 100%;
+  padding: 20px;
+
+}
+@media (min-width: 768px) {
+  .containerImgInfos {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .containerImgInfos {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .containerImgInfos {
+    width: 1170px;
+  }
+}
+
+
+.userPhotoPicture {
+    width: 60px;
+    height: 60px;
+    margin-right: 10px;
+}
+
+.userPhotoPicture > img {
+    max-height: 100%;
+    max-width: 100%;
+    border-radius: 50%;
+}
+
+.infoTitle {
+  display: block;
+  min-height: 120px;
+}
+
+.infoTitle h2 {
+  font-size: 16px;
+  line-height: 40px;
+  margin: 0;
+  font-weight: bold;
+}
+
+.photoUsername {
+  font-weight: bold;
+  padding-top: 10px;
+  font-size: 20px !important;
+
+}
+
+.userPhotoPicture {
+    width: 100px;
+    height: 100px;
+    outline: #d4dae0;
+    border-radius: 50%;
+    float: left;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-right: 20px;
+ 
+}
+
+.userPhotoPicture > img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    display: block;
+    box-sizing: border-box;
+}
+.photoFollowBtn {
+    width: 30px;
+    height: 30px;
+    outline: #d4dae0;
+    left:60px;
+    z-index: 999;
+    background-color: #5071ff;
+    margin-left:22px;
+    border: 3px solid #fff;
+    border-radius: 50%;
+    position: absolute;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+}
+
+.photoFollowBtn:hover {
+    -webkit-box-shadow: inset 0px 0px 9px -1px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    inset 0px 0px 9px -1px rgba(50, 50, 50, 0.75);
+    box-shadow:         inset 0px 0px 9px -1px rgba(50, 50, 50, 0.75);
+    cursor: pointer;
+
+}
+
+.photoDescription {
+  font-size: 13px;
+}
+
+.photoComments {
+
+}
+
+.photoComments ol {
+  list-style: none;
+  padding: 0;
+}
+
+.comment-body {
+  margin-left: 42px;
+  font-size: 13px;
+}
+
+.comment-meta span {
+  font-size: 11px;
+}
+
+.comment a {
+  font-size: 15px;
+  text-decoration: none;
+  font-weight: bold;
+  color: #006dac;
+}
+
+.comment a img, .comment-form a img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 10px;
+}
+
+.photoComments h2 {
+  font-size: 15px;
+  font-weight: bold;
+  padding: 0 0 8px 0;
+  border-bottom: 2px solid #ccc;
+}
+
+.comment-form {
+  width: 100%;
+}
+
+.comment-form textarea {
+  width:92%;
+  float: left;
+  border-radius: 4px;
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 13px;
+}
