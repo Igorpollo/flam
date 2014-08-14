@@ -25,7 +25,7 @@ end
 
   scope ':profile_name' do
     resources :photos
-   end  
+   end 
   
   match "photos/upload" => "photos#new", via: [:get, :post], as: :upload_photo
     

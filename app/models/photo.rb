@@ -11,6 +11,8 @@ class Photo < ActiveRecord::Base
     "#{title} by #{user_id}"
   end
 
+  
+
   belongs_to :album
   belongs_to :user
   has_attached_file :path
