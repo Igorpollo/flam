@@ -1,6 +1,15 @@
 class Photo < ActiveRecord::Base
+  is_impressionable
 	extend FriendlyId
-  friendly_id :title, :use => :slugged
+  friendly_id :photo_by_author, :use => :slugged
+
+  def should_generate_new_friendly_id?
+  title_changed?
+  end
+
+  def photo_by_author
+    "#{title} by #{user_id}"
+  end
 
   belongs_to :album
   belongs_to :user

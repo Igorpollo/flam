@@ -1,9 +1,8 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  
   before_filter :authenticate_user!, only: [:create, :new, :update, :destroy, :edit]
   before_filter :find_user
-  
+
  # skip_before_filter :verify_authenticity_token
 
   # GET /photos
@@ -16,6 +15,9 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+    @photo = Photo.friendly.find(params[:id])
+    impressionist(@photo)
+    @views = @photo.impressionist_count
   end
 
   # GET /photos/new
@@ -54,7 +56,7 @@ class PhotosController < ApplicationController
   # PATCH/PUT /photos/1.json
   def update
     respond_to do |format|
-      if current_user.photo.update(photo_params)
+      if @photo.update(photo_params)
         format.html { redirect_to @photo, notice: 'Photo was successfully updated.' }
         format.json { head :no_content }
       else

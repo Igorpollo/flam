@@ -23,6 +23,8 @@ gem 'friendly_id', '~> 5.0.0'
 
 gem "font-awesome-rails"
 
+gem 'impressionist'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 

@@ -7701,6 +7701,11 @@ background-color: #ccc;
   min-width: 50%;
 }
 
+.socialBox img {
+  width: 23px;
+  height: 20px;
+}
+
 #login {
   max-width: 310px;
   background-color: #fff;
@@ -8009,4 +8014,59 @@ box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
   padding: 10px;
   margin-bottom: 10px;
   font-size: 13px;
+}
+
+.group-like {
+  color: #888888;
+}
+
+.group-like:hover span {
+  padding-left: 30px;
+  cursor: pointer;
+  background-image: url(/assets/heart.png);
+  background-position: 1px -24px;
+  color: #444444;
+}
+
+.group-like span {
+  padding: 12px;
+  padding-left: 30px;
+  background-image: url(/assets/heart.png);
+  background-position: 1px 12px;
+  background-repeat: no-repeat;
+
+}
+
+.group-favorite {
+  color: #888888;
+}
+
+.group-favorite:hover span {
+  padding-left: 30px;
+  cursor: pointer;
+  background-image: url(/assets/star-icon.png);
+  background-position: 1px -25px;
+  color: #444444;
+}
+
+.group-favorite span {
+  padding: 12px;
+  padding-left: 30px;
+  background-image: url(/assets/star-icon.png);
+  background-position: 1px 9px;
+  background-repeat: no-repeat;
+
+}
+
+.group-view {
+  color: #888888;
+}
+
+.group-view span {
+  padding: 12px;
+  padding-left: 30px;
+  background-image: url(/assets/eye-icon.png);
+  background-position: 1px 12px;
+  background-repeat: no-repeat;
+
 }
