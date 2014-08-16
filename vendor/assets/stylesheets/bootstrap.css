@@ -7303,7 +7303,7 @@ button.close {
 
 .capaProfile {
     width: 100%;
-    height: 300px;
+    height: 400px;
 }
 
 .btnUpload {
@@ -7379,7 +7379,7 @@ button.close {
     height: 140px;
     border: 6px solid #fafafa;
     border-radius: 50%;
-    top: 230px;
+    top: 330px;
     position: absolute;
     box-sizing: border-box;
     left: 0;
@@ -7402,14 +7402,36 @@ button.close {
     height: 35px;
     left:50%;
     z-index: 999;
-    background-color: #5071ff;
     margin-left:22px;
     border: 4px solid #fafafa;
     border-radius: 50%;
-    top: 230px;
+    top: 330px;
     position: absolute;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
+}
+
+.follow-user {
+    background-color: #5071ff;
+    background-image: url(/assets/more.png);
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.following-user {
+  background-color: #00C400;
+   background-image: url(/assets/check.png);
+    background-position: center;
+    background-repeat: no-repeat;
+
+}
+
+.following-user:hover {
+  background-color: #D02C02;
+   background-image: url(/assets/cross.png);
+    background-position: center;
+    background-repeat: no-repeat;
+
 }
 
 .profileFollowBtn:hover {
@@ -7444,9 +7466,9 @@ button.close {
     border-bottom-left-radius: 5px;
     border: 1px solid #c2c2c2;
     border-top: none;
-    -webkit-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.3);
-    -moz-box-shadow:    0px 5px 5px 0px rgba(50, 50, 50, 0.3);
-    box-shadow:         0px 5px 5px 0px rgba(50, 50, 50, 0.3);
+    -webkit-box-shadow: 0px 5px 5px 0px rgba(50, 50, 50, 0.15);
+    -moz-box-shadow:    0px 5px 5px 0px rgba(50, 50, 50, 0.15);
+    box-shadow:         0px 5px 5px 0px rgba(50, 50, 50, 0.15);
 }
 
 .barUserProfile ul {
@@ -7980,6 +8002,7 @@ box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
 
 .comment-meta span {
   font-size: 11px;
+  color:#999999;
 }
 
 .comment a {

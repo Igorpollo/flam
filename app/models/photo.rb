@@ -1,5 +1,6 @@
 class Photo < ActiveRecord::Base
   is_impressionable
+  
 	extend FriendlyId
   friendly_id :photo_by_author, :use => :slugged
 
@@ -11,10 +12,10 @@ class Photo < ActiveRecord::Base
     "#{title} by #{user_id}"
   end
 
-  
 
   belongs_to :album
   belongs_to :user
+  has_many :comments
   has_attached_file :path
   # Validate content type
   validates_attachment_content_type :path, :content_type => /\Aimage/

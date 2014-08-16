@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140813124109) do
+ActiveRecord::Schema.define(version: 20140815110840) do
 
   create_table "albums", force: true do |t|
     t.integer  "user_id"
@@ -28,6 +28,17 @@ ActiveRecord::Schema.define(version: 20140813124109) do
     t.datetime "updated_at"
     t.integer  "user_id",    null: false
   end
+
+  create_table "comments", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.text     "comment"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["photo_id"], name: "index_comments_on_photo_id", using: :btree
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
 
   create_table "impressions", force: true do |t|
     t.string   "impressionable_type"

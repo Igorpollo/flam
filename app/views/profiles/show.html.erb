@@ -1,9 +1,153 @@
-<h1><%= @user.full_name %></h1>
-<%= link_to "Add friend", new_user_follower_path(follower_id: @user) %>
-<% if @clientes %>
-<div>
-	<% @clientes.each do |cliente| %>
-	<p><%= cliente.idade %></p>
-	<% end %>
-<div>
-<% end %>
+<% content_for :title,  @user.full_name + " Profile"  %>
+
+<div class="capaProfile">
+	<% if UserFollower.exists? user_id: current_user, follower_id: @user.id %>
+    <div class="profileFollowBtn following-user"></div>
+    <% else %>
+    <div class="profileFollowBtn follow-user"></div>
+    <% end %>
+    <div class="userProfilePicture">
+        <img src="<%= @user.image %>">
+    </div>
+
+</div>
+<div class="resto">
+    <div class="barUserProfile">
+       <ul class="pull-left">
+           <li>
+               <div class="infosProfile">
+                    <div class="iconInfo pull-left">
+                        <img src="/assets/heart.jpg">
+                    </div>
+                   <div class="numbersInfo">
+                       <strong>425</strong>
+                       <p>reputation</p>
+                   </div>
+               </div>
+           </li>
+           <li>
+               <div class="infosProfile">
+                   <div class="iconInfo pull-left">
+                       <img src="/assets/eye.jpg">
+                   </div>
+                   <div class="numbersInfo">
+                       <strong>5k</strong>
+                       <p>views</p>
+                   </div>
+               </div>
+           </li>
+           <li class="noBorder">
+               <div class="infosProfile">
+                   <div class="iconInfo pull-left">
+                       <img src="/assets/user.jpg">
+                   </div>
+                   <div class="numbersInfo">
+                       <strong>254</strong>
+                       <p>followers</p>
+                   </div>
+               </div>
+           </li>
+       </ul>
+
+        <ul class="pull-right">
+            <li>
+                <div class="infosProfile">
+                    <div class="iconInfo pull-left">
+                        <img src="/assets/image.jpg">
+                    </div>
+                    <div class="numbersInfo">
+                        <strong>563</strong>
+                        <p>photos</p>
+                    </div>
+                </div>
+            </li>
+            <li>
+                <div class="infosProfile">
+                    <div class="iconInfo pull-left">
+                        <img src="/assets/like.jpg">
+                    </div>
+                    <div class="numbersInfo">
+                        <strong>7k</strong>
+                        <p>likes</p>
+                    </div>
+                </div>
+            </li>
+
+            <li class="noBorder">
+                <div class="infosProfile">
+                    <div class="iconInfo pull-left">
+                        <img src="/assets/star.jpg">
+                    </div>
+                    <div class="numbersInfo">
+                        <strong>234</strong>
+                        <p>favorites</p>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+  <div class="infosUser">
+      <h1><%= @user.full_name %></h1>
+      <div class="navcontainerUser">
+          <ul>
+              <li>
+                  <img src="/assets/map.fw.png"> </im><a href="#">Rio de Janeiro</a>
+              </li>
+              <li>
+                  <img src="/assets/world.fw.png"> <a href="#">flampic.com</a>
+              </li>
+              <li>
+                  <img src="/assets/mail.fw.png"> <a href="#">Contact</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+
+</div>
+
+<div class="flow">
+    <% @photos.each do |photo| %><div class="thumb"><a href="<%= photo_path(photo.user.profile_name, photo) %>"><%= image_tag photo.path.url, :alt => photo.title %></a><div class="captionThumbSocial"><div class="pull-left titleBox"><p class="title"><%= photo.title %></p><span class="author">by <%= photo.user.full_name %></span></div><div class="pull-right socialBox"><a href="#" title="Like this photo?"><img src="/assets/heart-icon-white.png"></a></div></div></div><% end %>
+</div>
+
+
+<script>
+$('body').on('click', '.follow-user', function() {
+	var friendId = <%= @user.id %>
+	$.ajax({
+		url: 'followers',
+		method: "post",
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+		},
+		success: function() {
+			$('.profileFollowBtn').removeClass('follow-user');
+			$('.profileFollowBtn').addClass('following-user');
+		}
+
+	});
+});
+</script>
+
+<script>
+$('body').on('click', '.following-user', function() {
+	var friendId = <%= @user.id %>
+	$.ajax({
+		url: 'followers',
+		method: "POST",
+		data: {'_method': 'delete'},
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+		},
+		success: function() {
+			$('.profileFollowBtn').removeClass('following-user');
+			$('.profileFollowBtn').addClass('follow-user');
+		}
+	});
+});
+</script>
+
+
+<script>
+    $(".capaProfile").backstretch("/assets/14729189249_30180ff6a1_k.jpg");
+</script>

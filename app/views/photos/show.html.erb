@@ -1,6 +1,7 @@
 <% content_for :for_head do %>
   <%= stylesheet_link_tag "style-clean" %>
 <% end %>
+<% content_for :title,  @photo.title + " by " + @photo.user.full_name %>
 <div class="wrapImgShow">
 <div class="containerImg">
 
@@ -15,46 +16,38 @@
         <div class="infoTitle">
 
           <div class="photoFollowBtn">
-            <img src="/assets/2.fw.png" class="iconAction">
+            <img src="/assets/more.png" class="iconAction">
           </div>
           <div class="userPhotoPicture">
-            <img src="/assets/profile.jpg">
+            <img src="<%= @photo.user.image %>">
           </div>
-          <h2 class="photoUsername">Igor Martins</h2>
-          <h2>Pier de dia</h2>
+          <h2 class="photoUsername"><%= @photo.user.full_name %></h2>
+          <h2><%= @photo.title %></h2>
         </div>
         <span class="photoDescription">
           Ten years ago Puerto Escondido wasn't known for much more than a small fishing village on Mexico's Pacific Coast. Surfers have recently put this place on the map traveling to the port city for a chance to ride its famous break called the "Mexican Pipeline".
         </span>
+        <% if user_signed_in? %>
         <div class="photoComments">
-          <h2>3 Comments</h2>
+          <h2><%= @Comments.length %> Comments</h2>
           <ol>
+            <% @Comments.each do |comment| %>
             <li class="comment">
-              <a href="#"><img src="/assets/profile.jpg">Igor Martins
+              <a href="/<%= comment.user.profile_name %>"><img src="<%= comment.user.image %>"><%= comment.user.full_name %>
               </a>
               <div class="comment-body">
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam eu nisl neque. Aenean nec turpis sem. Aliquam molestie lorem nisi, ac lacinia dui viverra ac. Nulla eu consectetur ligula. Nulla cursus sagittis metus sit amet convallis. Ut feugiat arcu justo. Vestibulum euismod egestas nisl.</p>
+                <p><%= comment.body %></p>
                 <p class="comment-meta">
-                  <span> 6 hours ago </span>
+                  <span><%= time_ago_in_words(comment.created_at) %></span>
                 </p>
               </div>
             </li>
-            <li class="comment">
-              <a href="#"><img src="/assets/profile.jpg">Igor Martins
-              </a>
-              <div class="comment-body">
-                <p>Lorem ipsum dolor!</p>
-                <p class="comment-meta">
-                  <span> 6 hours ago </span>
-                </p>
-              </div>
-            </li>
-
+            <% end %>
             <div class="comment-form pull-left">
-              <a href="#" class="pull-left"><img src="/assets/profile.jpg">
+              <a href="#" class="pull-left"><img src="<%= current_user.image %>">
               </a>
                <textarea id="comment-new" rows="3" placeholder="Add a comment"></textarea>
-               <p class="pull-right"><button class="btn btn-primary">COMMENT</button> </p>
+               <p class="pull-right"><button class="btn btn-primary commentAdd">COMMENT</button> </p>
             </div>
 
           </ol>
@@ -67,7 +60,7 @@
           <span>157 Likes</span>
           </div>
           <div class="col-md-4 group-favorite">
-          <span>47 Favorites</span>
+          <span><%= @photo.id %> Favorites</span>
           </div>
           <div class="col-md-4 group-view">
           <span><%= @views %> Views</span>
@@ -77,4 +70,39 @@
 
     </div>
   </div>
+
 </div>
+<script>
+$(document).ready(function(){
+  var photo_id = <%= @photo.id %>;
+  
+  $('.commentAdd').click(function() {
+    var bodyComment = $('#comment-new').val();
+   $.ajax({
+    url: 'http://localhost:3000/photos/comment',
+    type: 'post',
+    data: { photo_id: photo_id, body: bodyComment },
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
+    success: function() {
+      var newEl = $('<li class="comment">' +
+        '<a href="#"><img src="<%= current_user.image %>"><%= current_user.full_name %></a>' +
+        '<div class="comment-body">' +
+        '<p>'+ bodyComment +'</p>' +
+        '<p class="comment-meta">' +
+        '<span><%= time_ago_in_words(Time.now) %></span>' +
+        '</p>' +
+        '</div>' +
+        '</li>'
+        );
+     $('#comment-new').val('');
+      newEl.hide();
+      $('li').last().append(newEl);
+      newEl.slideDown();
+    }
+   });
+  });
+});
+</script>
+<% end %>

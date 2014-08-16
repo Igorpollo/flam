@@ -37,6 +37,7 @@ class User < ActiveRecord::Base
     	end
   		end
          has_many :albums
+         has_many :comments
          has_many :photos
          has_many :clientes
          has_many :user_followers

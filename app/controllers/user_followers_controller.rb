@@ -1,39 +1,32 @@
 class UserFollowersController < ApplicationController
   before_filter :authenticate_user!, only: [:new]
+
   
-  def teste
-     render nothing: true
-     
-  
-      if params[:query]
-        @friend = User.where(id: params[:query]).first
-        @user_follower = current_user.user_followers.create(follower: @friend)
-      else
-        flash[:error] = "Friend required"
-      end
+def new
+
+    if request.get?
+      render file: 'public/404.html' 
+    else
+
+    render nothing: true
    
-    
+        @user = User.find_by_profile_name(params[:id])
+        @user_follower = current_user.user_followers.create(follower: @user.id)
+
+    end
+  
   end
   
   def destroy
     render nothing: true
-    @followers = current_user.user_followers.find(params[:query])
-    @followers.destroy
+    @user = User.find_by_profile_name(params[:id])
+    @followers = current_user.user_followers.where(follower_id: @user.id)
+    @followers.destroy_all
+
   end
   
   def show
     
   end
   
-  def new
-    @followers = current_user.followers.all
-    
-    if params[:query]
-        @friend = User.where(id: params[:query]).first
-        @user_follower = current_user.user_followers.create(follower: @friend)
-      else
-        flash[:error] = "Friend required"
-      end
-    
-  end
 end

@@ -10,13 +10,12 @@ Treebook::Application.routes.draw do
 end
   
   
-  
   resources :user_followers do
     member do
       post :new
     end
   end
-  match "/user_followers/new", to: "user_followers#new", via: :post
+  # match "/user_followers/new", to: "user_followers#new", via: :post
  
 
   root to: 'photos#flow'
@@ -26,8 +25,15 @@ end
   scope ':profile_name' do
     resources :photos
    end 
+
+
+   match "photos/comment" => "photos#comment", via: [:get, :post]
+
+   match ":id/followers" => "user_followers#new", via: [:get, :post]
+
+   match ":id/followers" => "user_followers#destroy", via: [:delete]
   
   match "photos/upload" => "photos#new", via: [:get, :post], as: :upload_photo
-    
+  
   
 end

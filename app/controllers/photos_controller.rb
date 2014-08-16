@@ -1,6 +1,6 @@
 class PhotosController < ApplicationController
   before_action :set_photo, only: [:show, :edit, :update, :destroy]
-  before_filter :authenticate_user!, only: [:create, :new, :update, :destroy, :edit]
+  before_filter :authenticate_user!, only: [:create, :new, :update, :destroy, :edit, :comment]
   before_filter :find_user
 
  # skip_before_filter :verify_authenticity_token
@@ -8,6 +8,7 @@ class PhotosController < ApplicationController
   # GET /photos
   # GET /photos.json
   def index
+    @photo = Photo.last
     @user = User.find_by_profile_name(params[:profile_name])
     @photos = @user.photos.all
   end
@@ -16,8 +17,15 @@ class PhotosController < ApplicationController
   # GET /photos/1.json
   def show
     @photo = Photo.friendly.find(params[:id])
+    @Comments = @photo.comments.all
     impressionist(@photo)
     @views = @photo.impressionist_count
+  end
+
+  def comment
+    render nothing: true
+
+    @comment = current_user.comments.create(comment_params)
   end
 
   # GET /photos/new
@@ -89,6 +97,10 @@ class PhotosController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_photo
       @photo = Photo.friendly.find(params[:id])
+    end
+
+    def comment_params
+      params.permit(:user_id, :photo_id, :body)
     end
     
     def find_user
