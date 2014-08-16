@@ -20,6 +20,7 @@ class PhotosController < ApplicationController
     @Comments = @photo.comments.all
     impressionist(@photo)
     @views = @photo.impressionist_count
+    @likes = @photo.likes.count
   end
 
   def comment

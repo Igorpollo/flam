@@ -8039,37 +8039,34 @@ box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
   font-size: 13px;
 }
 
-.group-like {
+.group-like, .group-view, .group-favorite {
   color: #888888;
-}
-
-.group-like:hover span {
-  padding-left: 30px;
-  cursor: pointer;
-  background-image: url(/assets/heart.png);
-  background-position: 1px -24px;
-  color: #444444;
 }
 
 .group-like span {
   padding: 12px;
   padding-left: 30px;
   background-image: url(/assets/heart.png);
-  background-position: 1px 12px;
+  background-position: 1px 13px;
   background-repeat: no-repeat;
-
 }
 
-.group-favorite {
-  color: #888888;
-}
-
-.group-favorite:hover span {
+.group-like-marked span {
+  padding: 12px;
   padding-left: 30px;
   cursor: pointer;
-  background-image: url(/assets/star-icon.png);
-  background-position: 1px -25px;
+  background-image: url(/assets/heart.png);
+  background-position: 1px -58px;
+  background-repeat: no-repeat;
+}
+
+.group-like:hover span {
+  padding-left: 30px;
+  cursor: pointer;
+  background-image: url(/assets/heart.png);
+  background-position: 1px -23px;
   color: #444444;
+  background-repeat: no-repeat;
 }
 
 .group-favorite span {
@@ -8081,9 +8078,24 @@ box-shadow:         inset 0px 0px 10px 2px rgba(50, 50, 50, 0.5);
 
 }
 
-.group-view {
-  color: #888888;
+.group-favorite:hover span {
+  padding-left: 30px;
+  cursor: pointer;
+  background-image: url(/assets/star-icon.png);
+  background-position: 1px -25px;
+  color: #444444;
 }
+
+.group-favorite-marked span {
+  padding: 12px;
+  padding-left: 30px;
+  background-image: url(/assets/star-icon.png);
+  background-position: 1px -58px;
+  background-repeat: no-repeat;
+  cursor: pointer;
+}
+
+
 
 .group-view span {
   padding: 12px;

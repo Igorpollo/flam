@@ -1,6 +1,5 @@
 class Photo < ActiveRecord::Base
   is_impressionable
-  
 	extend FriendlyId
   friendly_id :photo_by_author, :use => :slugged
 
@@ -8,13 +7,17 @@ class Photo < ActiveRecord::Base
   title_changed?
   end
 
+  delegate :profile_name, to: :user
+
   def photo_by_author
-    "#{title} by #{user_id}"
+    "#{title} by #{profile_name}"
   end
 
 
   belongs_to :album
   belongs_to :user
+  has_many :likes
+  has_many :favorites
   has_many :comments
   has_attached_file :path
   # Validate content type

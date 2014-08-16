@@ -56,12 +56,28 @@
 
       <div class="col-md-6">
         <div class="col-md-12">
-          <div class="col-md-4 group-like">
-          <span>157 Likes</span>
-          </div>
-          <div class="col-md-4 group-favorite">
-          <span><%= @photo.id %> Favorites</span>
-          </div>
+
+          <% if Like.exists? user_id: current_user, photo_id: @photo.id %>
+            <div class="col-md-4 likes group-like-marked">
+            <span><%= @likes %> Likes</span>
+            </div>
+          <% else %>
+            <div class="col-md-4 likes group-like">
+            <span><%= @photo.likes.count %> Likes</span>
+            </div>
+          <% end %>
+
+          <% if Favorite.exists? user_id: current_user, photo_id: @photo.id %>
+            <div class="col-md-4 favorites group-favorite-marked">
+            <span><%= @photo.favorites.count %> Favorites</span>
+            </div>
+          <% else %>
+            <div class="col-md-4 favorites group-favorite">
+            <span><%= @photo.favorites.count %> Favorites</span>
+            </div>
+          <% end %>
+
+
           <div class="col-md-4 group-view">
           <span><%= @views %> Views</span>
           </div>
@@ -72,6 +88,89 @@
   </div>
 
 </div>
+
+<script>
+$('body').on('click', '.group-favorite', function() {
+  var photoId = '<%= @photo.slug %>';
+  $('.favorites').removeClass('group-favorite');
+  $('.favorites').addClass('group-favorite-marked');
+  $.ajax({
+    url: '../favorites?photo_id=' + photoId,
+    method: "post",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
+    success: function(data) {
+      $('.favorites span').html(data + ' Favorites')
+    }
+
+  });
+});
+</script>
+
+<script>
+$('body').on('click', '.group-favorite-marked', function() {
+  var photoId = '<%= @photo.slug %>';
+  $('.favorites').removeClass('group-favorite-marked');
+  $('.favorites').addClass('group-favorite');
+  $.ajax({
+    url: '../favorites?photo_id=' + photoId,
+    method: "post",
+    data: {'_method': 'delete'},
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
+    success: function(data) {
+      $('.favorites span').html(data + ' Favorites')
+    }
+
+  });
+});
+</script>
+
+<script>
+
+$('body').on('click', '.group-like', function() {
+  var photoId = '<%= @photo.slug %>';
+   $('.likes').removeClass('group-like');
+   $('.likes').addClass('group-like-marked');
+  $.ajax({
+    url: '../likes?photo_id=' + photoId,
+    method: "post",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
+    success: function(data) {
+      $('.likes span').html(data + ' Likes')
+    }
+
+  });
+});
+
+</script>
+
+<script>
+
+$('body').on('click', '.group-like-marked', function() {
+  var photoId = '<%= @photo.slug %>';
+   $('.likes').removeClass('group-like-marked');
+   $('.likes').addClass('group-like');
+  $.ajax({
+    url: '../likes?photo_id=' + photoId,
+    method: "post",
+    data: {'_method': 'delete'},
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+    },
+    success: function(data) {
+      $('.likes span').html(data + ' Likes')
+    }
+
+  });
+});
+
+</script>
+
 <script>
 $(document).ready(function(){
   var photo_id = <%= @photo.id %>;

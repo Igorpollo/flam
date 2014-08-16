@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140815110840) do
+ActiveRecord::Schema.define(version: 20140816185310) do
 
   create_table "albums", force: true do |t|
     t.integer  "user_id"
@@ -32,13 +32,23 @@ ActiveRecord::Schema.define(version: 20140815110840) do
   create_table "comments", force: true do |t|
     t.integer  "user_id"
     t.integer  "photo_id"
-    t.text     "comment"
+    t.text     "body"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   add_index "comments", ["photo_id"], name: "index_comments_on_photo_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "favorites", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "favorites", ["photo_id"], name: "index_favorites_on_photo_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "impressions", force: true do |t|
     t.string   "impressionable_type"
@@ -64,6 +74,16 @@ ActiveRecord::Schema.define(version: 20140815110840) do
   add_index "impressions", ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index", using: :btree
   add_index "impressions", ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index", length: {"impressionable_type"=>nil, "message"=>255, "impressionable_id"=>nil}, using: :btree
   add_index "impressions", ["user_id"], name: "index_impressions_on_user_id", using: :btree
+
+  create_table "likes", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "photo_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "likes", ["photo_id"], name: "index_likes_on_photo_id", using: :btree
+  add_index "likes", ["user_id"], name: "index_likes_on_user_id", using: :btree
 
   create_table "photos", force: true do |t|
     t.integer  "album_id"

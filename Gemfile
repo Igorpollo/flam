@@ -23,8 +23,6 @@ gem "font-awesome-rails"
 
 gem 'impressionist'
 
-gem 'js-routes'
-
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'
 

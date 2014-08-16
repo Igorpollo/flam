@@ -32,6 +32,14 @@ end
    match ":id/followers" => "user_followers#new", via: [:get, :post]
 
    match ":id/followers" => "user_followers#destroy", via: [:delete]
+
+   match ":id/likes" => "profiles#like", via: [:get, :post]
+
+   match ":id/likes" => "profiles#dislike", via: [:delete]
+
+   match ":id/favorites" => "profiles#favorite", via: [:get, :post]
+
+   match ":id/favorites" => "profiles#unfavorite", via: [:delete]
   
   match "photos/upload" => "photos#new", via: [:get, :post], as: :upload_photo
   
