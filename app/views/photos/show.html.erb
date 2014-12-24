@@ -19,21 +19,22 @@
             <img src="/assets/more.png" class="iconAction">
           </div>
           <div class="userPhotoPicture">
-            <img src="<%= @photo.user.image %>">
+            <img src="<%= @photo.user.avatar.url(:face) %>">
           </div>
           <h2 class="photoUsername"><%= @photo.user.full_name %></h2>
           <h2><%= @photo.title %></h2>
         </div>
         <span class="photoDescription">
-          Ten years ago Puerto Escondido wasn't known for much more than a small fishing village on Mexico's Pacific Coast. Surfers have recently put this place on the map traveling to the port city for a chance to ride its famous break called the "Mexican Pipeline".
+         <%= @photo.description %>
         </span>
+
         <% if user_signed_in? %>
         <div class="photoComments">
           <h2><%= @Comments.length %> Comments</h2>
           <ol>
             <% @Comments.each do |comment| %>
             <li class="comment">
-              <a href="/<%= comment.user.profile_name %>"><img src="<%= comment.user.image %>"><%= comment.user.full_name %>
+              <a href="/<%= comment.user.profile_name %>"><img src="<%= comment.user.avatar.url(:face) %>"><%= comment.user.full_name %>
               </a>
               <div class="comment-body">
                 <p><%= comment.body %></p>
@@ -44,7 +45,7 @@
             </li>
             <% end %>
             <div class="comment-form pull-left">
-              <a href="#" class="pull-left"><img src="<%= current_user.image %>">
+              <a href="#" class="pull-left"><img src="<%= current_user.avatar.url(:face) %>">
               </a>
                <textarea id="comment-new" rows="3" placeholder="Add a comment"></textarea>
                <p class="pull-right"><button class="btn btn-primary commentAdd">COMMENT</button> </p>
@@ -79,7 +80,7 @@
 
 
           <div class="col-md-4 group-view">
-          <span><%= @views %> Views</span>
+          <span><%= @photo.views.count %> Views</span>
           </div>
         </div>
       </div>
@@ -91,11 +92,11 @@
 
 <script>
 $('body').on('click', '.group-favorite', function() {
-  var photoId = '<%= @photo.slug %>';
+  var photoId = '<%= @photo.id %>';
   $('.favorites').removeClass('group-favorite');
   $('.favorites').addClass('group-favorite-marked');
   $.ajax({
-    url: '../favorites?photo_id=' + photoId,
+    url: Routes.profile_favorites_path('<%= current_user.profile_name %>', {photo_id: photoId}),
     method: "post",
     beforeSend: function(xhr) {
       xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
@@ -110,11 +111,11 @@ $('body').on('click', '.group-favorite', function() {
 
 <script>
 $('body').on('click', '.group-favorite-marked', function() {
-  var photoId = '<%= @photo.slug %>';
+  var photoId = '<%= @photo.id %>';
   $('.favorites').removeClass('group-favorite-marked');
   $('.favorites').addClass('group-favorite');
   $.ajax({
-    url: '../favorites?photo_id=' + photoId,
+    url: Routes.profile_favorites_path('<%= current_user.profile_name %>', {photo_id: photoId}),
     method: "post",
     data: {'_method': 'delete'},
     beforeSend: function(xhr) {
@@ -186,7 +187,7 @@ $(document).ready(function(){
     },
     success: function() {
       var newEl = $('<li class="comment">' +
-        '<a href="#"><img src="<%= current_user.image %>"><%= current_user.full_name %></a>' +
+        '<a href="#"><img src="<%= current_user.avatar.url(:face) %>"><%= current_user.full_name %></a>' +
         '<div class="comment-body">' +
         '<p>'+ bodyComment +'</p>' +
         '<p class="comment-meta">' +
@@ -204,4 +205,19 @@ $(document).ready(function(){
   });
 });
 </script>
+<% else %>
+</div>
+<div class="col-md-6">
+  <div class="col-md-12">
+    <div class="col-md-4 likes group-like">
+            <span><%= @photo.likes.count %> Likes </span>
+    </div>
+    <div class="col-md-4 favorites group-favorite">
+            <span><%= @photo.favorites.count %> Favorites</span>
+    </div>
+     <div class="col-md-4 group-view">
+           <span><%= @views %> Views</span>
+     </div>
+  </div>
+</div>
 <% end %>

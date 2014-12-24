@@ -3,9 +3,3 @@ body {
   background-color: #fff !important;
   background-image: none;
 }
-.navbar-static-top {
-	border-width: 0 0 1px;
-    -webkit-box-shadow: 0px 1px 5px 0px rgba(50, 50, 50, 0.2);
-    -moz-box-shadow:    0px 1px 5px 0px rgba(50, 50, 50, 0.2);
-    box-shadow:         0px 1px 5px 0px rgba(50, 50, 50, 0.2);
-}

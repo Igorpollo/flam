@@ -1,5 +1,4 @@
 class Photo < ActiveRecord::Base
-  is_impressionable
 	extend FriendlyId
   friendly_id :photo_by_author, :use => :slugged
 
@@ -18,6 +17,7 @@ class Photo < ActiveRecord::Base
   belongs_to :user
   has_many :likes
   has_many :favorites
+  has_many :views
   has_many :comments
   has_attached_file :path
   # Validate content type

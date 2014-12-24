@@ -377,9 +377,25 @@
   photos_path: function(_profile_name, options) {
   return Utils.build_path(["profile_name"], ["format"], [2,[2,[2,[2,[7,"/",false],[3,"profile_name",false]],[7,"/",false]],[6,"photos",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
+// photos_comment => /photos/comment(.:format)
+  photos_comment_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"photos",false]],[7,"/",false]],[6,"comment",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
 // profile => /:id(.:format)
   profile_path: function(_id, options) {
   return Utils.build_path(["id"], ["format"], [2,[2,[7,"/",false],[3,"id",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// profile_edit => /profile/edit(.:format)
+  profile_edit_path: function(options) {
+  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"profile",false]],[7,"/",false]],[6,"edit",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// profile_favorites => /:id/favorites(.:format)
+  profile_favorites_path: function(_id, options) {
+  return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[3,"id",false]],[7,"/",false]],[6,"favorites",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
+  },
+// profile_likes => /:id/likes(.:format)
+  profile_likes_path: function(_id, options) {
+  return Utils.build_path(["id"], ["format"], [2,[2,[2,[2,[7,"/",false],[3,"id",false]],[7,"/",false]],[6,"likes",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
 // rails_info => /rails/info(.:format)
   rails_info_path: function(options) {
@@ -412,10 +428,6 @@
 // user_followers => /user_followers(.:format)
   user_followers_path: function(options) {
   return Utils.build_path([], ["format"], [2,[2,[7,"/",false],[6,"user_followers",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
-  },
-// user_followers_new => /user_followers/new(.:format)
-  user_followers_new_path: function(options) {
-  return Utils.build_path([], ["format"], [2,[2,[2,[2,[7,"/",false],[6,"user_followers",false]],[7,"/",false]],[6,"new",false]],[1,[2,[8,".",false],[3,"format",false]],false]], arguments);
   },
 // user_omniauth_authorize => /users/auth/:provider(.:format)
   user_omniauth_authorize_path: function(_provider, options) {

@@ -6,7 +6,7 @@
 <div class="navcontainer">
     <ul>
         <li>
-            <a href="#">Recent</a>
+            <a href="#" class="active">Recent</a>
         </li>
         <li>
             <a href="#">Popular</a>
@@ -18,13 +18,23 @@
 </div>
 <% end %>
 <div class="flow">
-    <% @photos.each do |photo| %><div class="thumb"><a href="<%= photo_path(photo.user.profile_name, photo) %>"><%= image_tag photo.path.url, :alt => photo.title %></a><div class="captionThumbSocial"><div class="pull-left titleBox"><p class="title"><%= photo.title %></p><span class="author">by <%= photo.user.full_name %></span></div><div class="pull-right socialBox"><a href="#" title="Like this photo?"><img src="/assets/heart-icon-white.png"></a></div></div></div><% end %>
+    <% @photos.each do |photo| %><div class="thumb"><a href="<%= photo_path(photo.user.profile_name, photo) %>"><%= image_tag photo.path.url, :alt => photo.title %></a><div class="captionThumbSocial"><div class="pull-left titleBox"><p class="title"><%= photo.title %></p>by <%= link_to photo.user.full_name, profile_path(photo.user.profile_name), class: 'author' %>
+<% if user_signed_in? %>
+</div><div class="pull-right socialBox">
+ <% if Favorite.exists? user_id: current_user, photo_id: photo.id %>
+    <a class="favorite favIconCapt-marked" data-photo="<%= photo.id %>" href="#" title="Favorite this photo"><i class="fa fa-star"></i></a>
+ <% else %>
+    <a class="favorite favIconCapt" data-photo="<%= photo.id %>" href="#" title="Favorite this photo"><i class="fa fa-star"></i></a>
+ <% end %>
 
 
+<% if Like.exists? user_id: current_user, photo_id: photo.id %>
+<a href="#" data-photo="<%= photo.id %>" class="likeIconCapt-marked" title="Like this photo?"><i class="fa fa-heart"></i></a>
+<% else %>
+ <a href="#" data-photo="<%= photo.id %>" class="likeIconCapt" title="Like this photo?"><i class="fa fa-heart"></i></a>
+<% end %>
+<% end %>
+</div></div></div><% end %>
 
 
-
-<script>
-    $(".capa").backstretch("http://31.media.tumblr.com/f0cb0d2bc887555434fa3afe0530e1cf/tumblr_n1ipr3bTo11st5lhmo1_1280.jpg");
-</script>
 

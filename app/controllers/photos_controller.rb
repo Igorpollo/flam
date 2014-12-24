@@ -16,11 +16,17 @@ class PhotosController < ApplicationController
   # GET /photos/1
   # GET /photos/1.json
   def show
+   
     @photo = Photo.friendly.find(params[:id])
     @Comments = @photo.comments.all
-    impressionist(@photo)
-    @views = @photo.impressionist_count
     @likes = @photo.likes.count
+    #Add view
+    @photo.views.create()
+    #Add reputation
+    @user = User.find(@photo.user_id)
+    @user.reputation = @user.reputation + 0.1
+    @user.save
+     render layout: "clean"
   end
 
   def comment
@@ -41,6 +47,10 @@ class PhotosController < ApplicationController
   def flow
     @user = current_user
     @photos = Photo.all.order(id: :desc)
+  end
+
+  def search
+
   end
 
   # GET /photos/1/edit

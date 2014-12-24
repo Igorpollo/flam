@@ -1,10 +1,127 @@
+
+<div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+  <div class="row">
+    <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: "form-horizontal",  :multipart => true }) do |f| %>
+  <%= devise_error_messages! %>
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <%= image_tag current_user.avatar.url(:face), class: "avatar img-circle-profile" %>
+          <h6>Upload a different photo...</h6>
+          <%= f.input :avatar, input_html: { class: 'form-control', type: 'file' }, label: false  %>
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          This is an <strong>.alert</strong>. Use this to show important messages to the user.
+        </div>
+        <div class="col-md-6">
+          <h3>Personal info</h3>
+        
+          <div class="form-group">
+            <label>First name:</label>
+              <%= f.input :first_name, autofocus: true, input_html: { class: 'form-control' }, label: false  %>
+          </div>
+          <div class="form-group">
+            <label>Last name:</label>
+              <%= f.input :last_name, autofocus: true, input_html: { class: 'form-control' }, label: false  %>
+          </div>
+          <div class="form-group has-feedback">
+            <label>Profile name:</label>
+              <%= f.input :profile_name, autofocus: true,  input_html: { class: 'form-control' }, label: false  %>
+              <small>Your URL will be http://www.flampic.com/<b><%= current_user.profile_name %></b></small>
+              <span  id="success" data-hovercolor="#3C763D" class="livicon form-control-feedback liv-feedback" data-name="check" data-c="#3C763D" data-s="30" data-d="500"></span>
+              <span id="remove" data-hovercolor="#A94442" class="livicon form-control-feedback liv-feedback" data-name="remove" data-c="#A94442" data-s="30" data-d="500"></span>
+              <span class="livicon form-control-feedback liv-feedback" id="loading" data-name="spinner-seven" data-c="#bbb" data-s="30" data-loop="true" data-d="1200"></span>
+
+            </div>
+          
+          <div class="form-group has-feedback">
+            <label>Email:</label>
+               <%= f.input :email, autofocus: true, input_html: { class: 'form-control' }, label: false  %>
+               
+          </div>
+          <div class="form-group">
+            <label>Password:</label>       
+              <%= f.input :password, autofocus: true, input_html: { class: 'form-control' }, label: false  %>
+          </div>
+          <div class="form-group">
+            <label>Confirm password:</label>
+              <%= f.input :password_confirmation, autofocus: true, input_html: { class: 'form-control' }, label: false  %>
+          </div>
+        </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+              <%= f.submit "Update", class: 'btn btn-primary' %>
+              <span></span>
+              <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+        
+      </div>
+    <% end %>
+  </div>
+</div>
+<hr>
+  <script>
+  $(document).ready(function() {
+    $('span').hide();
+    $("#user_profile_name").keyup(function() {
+    
+    var profileName = $("#user_profile_name").val();
+    $("small b").html(profileName);
+    if($(this).val().length >= 4) {
+      
+      $.ajax({
+      url: Routes.edit_user_registration_path({profile_name: profileName}),
+      beforeSend: function(xhr) {
+        xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content'));
+      $('#loading').show();
+        
+      },
+      success: function(result) {
+
+      if(result == false) {
+
+         $('#remove').hide();
+         $('#loading').hide();
+         $('#success').show();
+        
+        } else {
+        $('#success').hide();
+        $('#loading').hide();
+        $('#remove').show();
+          
+        }
+        
+     
+       
+      }
+      })
+    }
+    });
+    
+    
+  });
+</script>
+
+
+
 <h2>Edit <%= resource_name.to_s.humanize %></h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
+<%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
   <%= devise_error_messages! %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, autofocus: true %></div>
+  <div class="form-group">
+  <%= f.input :email, autofocus: true, input_html: { class: 'form-control' }, label: false  %></div>
+  </div>
 
   <div><%= f.label :first_name %><br />
   <%= f.text_field :first_name %></div>

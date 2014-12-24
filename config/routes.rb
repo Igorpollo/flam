@@ -1,6 +1,5 @@
 Treebook::Application.routes.draw do
   
-
   
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks", :registrations => "registrations" }
   resources :clientes
@@ -26,6 +25,7 @@ end
     resources :photos
    end 
 
+   match "profile/edit" => "profiles#edit", via: [:get, :post]
 
    match "photos/comment" => "photos#comment", via: [:get, :post]
 
@@ -33,11 +33,11 @@ end
 
    match ":id/followers" => "user_followers#destroy", via: [:delete]
 
-   match ":id/likes" => "profiles#like", via: [:get, :post]
+   match ":id/likes" => "profiles#like", via: [:get, :post], as: :profile_likes
 
    match ":id/likes" => "profiles#dislike", via: [:delete]
 
-   match ":id/favorites" => "profiles#favorite", via: [:get, :post]
+   match ":id/favorites" => "profiles#favorite", via: [:get, :post], as: :profile_favorites
 
    match ":id/favorites" => "profiles#unfavorite", via: [:delete]
   

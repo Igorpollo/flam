@@ -7,7 +7,7 @@
     <div class="profileFollowBtn follow-user"></div>
     <% end %>
     <div class="userProfilePicture">
-        <img src="<%= @user.image %>">
+        <img src="<%= @user.avatar.url(:face) %>">
     </div>
 
 </div>
@@ -20,7 +20,7 @@
                         <img src="/assets/heart.jpg">
                     </div>
                    <div class="numbersInfo">
-                       <strong>425</strong>
+                       <strong><%= @user.reputation.floor %></strong>
                        <p>reputation</p>
                    </div>
                </div>
@@ -31,7 +31,7 @@
                        <img src="/assets/eye.jpg">
                    </div>
                    <div class="numbersInfo">
-                       <strong>5k</strong>
+                       <strong><%= View.joins(photo: :user).where(photos: { user_id: @user }).count %></strong>
                        <p>views</p>
                    </div>
                </div>
@@ -42,7 +42,7 @@
                        <img src="/assets/user.jpg">
                    </div>
                    <div class="numbersInfo">
-                       <strong>254</strong>
+                       <strong><%= @user.followers.count %></strong>
                        <p>followers</p>
                    </div>
                </div>
@@ -56,7 +56,7 @@
                         <img src="/assets/image.jpg">
                     </div>
                     <div class="numbersInfo">
-                        <strong>563</strong>
+                        <strong><%= @user.photos.count %></strong>
                         <p>photos</p>
                     </div>
                 </div>
@@ -67,7 +67,7 @@
                         <img src="/assets/like.jpg">
                     </div>
                     <div class="numbersInfo">
-                        <strong>7k</strong>
+                        <strong><%= Like.joins(photo: :user).where(photos: { user_id: @user }).count %></strong>
                         <p>likes</p>
                     </div>
                 </div>
@@ -79,7 +79,7 @@
                         <img src="/assets/star.jpg">
                     </div>
                     <div class="numbersInfo">
-                        <strong>234</strong>
+                        <strong><%= Favorite.joins(photo: :user).where(photos: { user_id: @user }).count %></strong>
                         <p>favorites</p>
                     </div>
                 </div>

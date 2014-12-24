@@ -21,7 +21,11 @@ gem 'friendly_id', '~> 5.0.0'
 
 gem "font-awesome-rails"
 
-gem 'impressionist'
+gem "js-routes"
+
+gem 'cloudinary'
+
+gem 'carrierwave'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.2'

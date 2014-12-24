@@ -7,11 +7,10 @@ def new
     if request.get?
       render file: 'public/404.html' 
     else
-
     render nothing: true
    
         @user = User.find_by_profile_name(params[:id])
-        @user_follower = current_user.user_followers.create(follower: @user.id)
+        @user_follower = current_user.user_followers.create(follower: @user)
 
     end
   
